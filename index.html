@@ -149,7 +149,8 @@
         })
 
         output.addEventListener('click', async (e) => {
-            const text = await navigator.clipboard.writeText(e.target.value);
+            if (!output.innerHTML) return;
+            const text = await navigator.clipboard.writeText(output.innerHTML);
             copied.hidden = false;
             setTimeout(() => {
                 copied.hidden = true;
