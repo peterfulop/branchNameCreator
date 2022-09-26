@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let's Branch!</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.svg">
+
 </head>
 
 <style>
@@ -30,6 +32,7 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
+
     }
 
 
@@ -88,10 +91,11 @@
         font-family: 'Courier New', Courier, monospace;
         cursor: pointer;
         border-radius: 10px;
-        height: 5rem;
+        min-height: 5rem;
         background-color: rgb(241, 241, 241);
         color: darkgray;
         padding: 1rem;
+        overflow: auto;
     }
 
     #alert {
@@ -141,6 +145,7 @@
         clearBtn.addEventListener('click', async (e) => {
             input.value = '';
             output.innerHTML = '';
+            await navigator.clipboard.writeText('');
         })
 
         output.addEventListener('click', async (e) => {
@@ -152,7 +157,7 @@
         });
 
         input.addEventListener("input", (e) => {
-            output.value = replaceText(e.target.value);
+            output.innerHTML = replaceText(e.target.value);
         })
 
     };
