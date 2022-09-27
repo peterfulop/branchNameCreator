@@ -121,49 +121,44 @@
 </body>
 <script>
 
-    window.onload = (event) => {
-        const input = document.getElementById("input");
-        const output = document.getElementById("output");
-        const pasteBtn = document.getElementById("paste-btn");
-        const clearBtn = document.getElementById("clear-btn");
-        const copied = document.getElementById("alert");
+    const input = document.getElementById("input");
+    const output = document.getElementById("output");
+    const pasteBtn = document.getElementById("paste-btn");
+    const clearBtn = document.getElementById("clear-btn");
+    const copied = document.getElementById("alert");
 
-        const replaceText = (text) => {
-            return text.replace(/  +/g, ' ').trim().replaceAll(" ", "-").toLowerCase()
-        }
+    const replaceText = (text) => {
+        return text.replace(/  +/g, ' ').trim().replaceAll(" ", "-").toLowerCase()
+    }
 
-        pasteBtn.addEventListener('click', async (e) => {
-            const text = await navigator.clipboard.readText();
-            if (!text) {
-                alert("Your clipboard is empty!");
-                return;
-            };
-            input.value = text;
-            output.innerHTML = replaceText(text);
-        })
+    pasteBtn.addEventListener('click', async (e) => {
+        const text = await navigator.clipboard.readText();
+        if (!text) {
+            alert("Your clipboard is empty!");
+            return;
+        };
+        input.value = text;
+        output.innerHTML = replaceText(text);
+    })
 
-        clearBtn.addEventListener('click', async (e) => {
-            input.value = '';
-            output.innerHTML = '';
-            await navigator.clipboard.writeText('');
-        })
+    clearBtn.addEventListener('click', async (e) => {
+        input.value = '';
+        output.innerHTML = '';
+        await navigator.clipboard.writeText('');
+    })
 
-        output.addEventListener('click', async (e) => {
-            if (!output.innerHTML) return;
-            const text = await navigator.clipboard.writeText(output.innerHTML);
-            copied.hidden = false;
-            setTimeout(() => {
-                copied.hidden = true;
-            }, 1000)
-        });
+    output.addEventListener('click', async (e) => {
+        if (!output.innerHTML) return;
+        const text = await navigator.clipboard.writeText(output.innerHTML);
+        copied.hidden = false;
+        setTimeout(() => {
+            copied.hidden = true;
+        }, 1000)
+    });
 
-        input.addEventListener("input", (e) => {
-            output.innerHTML = replaceText(e.target.value);
-        })
-
-    };
-
-
+    input.addEventListener("input", (e) => {
+        output.innerHTML = replaceText(e.target.value);
+    })
 
 </script>
 
